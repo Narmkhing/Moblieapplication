@@ -1,0 +1,33 @@
+function addNums(collection_1: lis[], collection_2: lis[]): lis[] {
+  const mergedArr: lis[] = [];
+  let i = 0;
+  let j = 0;
+
+  while (i < collection_1.length && j < collection_2.length) {
+    if (collection_1[i] < collection_2[j]) {
+      mergedArr.push(collection_1[i]);
+      i++;
+    } else {
+      mergedArr.push(collection_2[j]);
+      j++;
+    }
+  }
+
+  for (let i=0; i < collection_1.length; i++) {
+    mergedArr.push(collection_1[i]);
+  }
+
+  for (let j=0; j < collection_2.length; j++) {
+    mergedArr.push(collection_2[j]);
+  }
+
+  return mergedArr;
+}
+
+// Unit tests
+describe('addNums', () => {
+  it('Test for 2 null list', async () => {
+    expect(addNums([], [])).toEqual([]);
+  });
+
+});
