@@ -1,4 +1,5 @@
 /* CATEGORY */
+import 'package:demo/screen/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,18 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesPage extends State<Categories> {
+  int _selectedTab = 0;
+  final List _screens = [
+    {"screen": const Categories(name: 'Firmigo')},
+    {"screen": const ProfilePage()}
+  ];
+
+  _changeTab(int index) {
+    setState(() {
+      _selectedTab = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +75,8 @@ class _CategoriesPage extends State<Categories> {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   ListTile(
-                    title: const Text('Yoga Meditation'),
+                    title: const Text('Yoga Meditation',
+                        style: TextStyle(fontSize: 25)),
                     subtitle: const Text(
                         'The pose begins when you want to leave it.'),
                     leading: const Image(
@@ -78,6 +92,21 @@ class _CategoriesPage extends State<Categories> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedTab,
+        onTap: (index) => _changeTab(index),
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.fitness_center), label: "Yoga")
+        ],
       ),
     );
   }
