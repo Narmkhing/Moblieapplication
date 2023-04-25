@@ -27,7 +27,7 @@ class CathController extends GetxController {
 
   void fetchdata() async {
     final reponse = await http.get(Uri.parse(
-        'https://raw.githubusercontent.com/Narmkhing/RESTAPI/main/yogaApi.json'));
+        'https://raw.githubusercontent.com/Narmkhing/RESTAPI/main/API.json'));
     if (reponse.statusCode == 200) {
       final data = jsonDecode(reponse.body).cast<Map<String, dynamic>>();
       yogaModels.value =
