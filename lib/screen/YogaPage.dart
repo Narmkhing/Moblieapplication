@@ -5,9 +5,26 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import '../controller/category_controller.dart';
 import '../widgets/Yogaitem.dart';
+import 'ProfilePage.dart';
 
-class YogaPage extends StatelessWidget {
+class YogaPage extends StatefulWidget {
   YogaPage({super.key});
+  @override
+  State<YogaPage> createState() => _YogaPage();
+}
+
+class _YogaPage extends State<YogaPage> {
+  int _selectedTab = 0;
+  final List _screens = [
+    {"screen": const Categories(name: 'Firmigo')},
+    {"screen": const ProfilePage()}
+  ];
+
+  _changeTab(int index) {
+    setState(() {
+      _selectedTab = index;
+    });
+  }
 
   final CathController cathController = Get.put(CathController());
 
@@ -65,6 +82,21 @@ class YogaPage extends StatelessWidget {
                     }))),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedTab,
+        onTap: (index) => _changeTab(index),
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.fitness_center), label: "Yoga")
+        ],
       ),
     );
   }
